@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html lang="en">
+<head th:replace="~{partials/partials :: head}"></head>
+<body>
+
+<header th:replace="~{partials/partials :: header}"></header>
+
+<main class="container">
+    <h1>Your Posts</h1>
+    <section class="row gap-3">
+        <article th:each="post : ${savedPosts}" class="card col-3 p-0">
+            <div class="card-header">
+                <h3 th:text="${post.title}" ></h3>
+            </div>
+            <div class="card-body">
+                <p th:text="${post.body}"></p>
+            </div>
+            <div class="card-footer">
+                <a href="#" type="button" class="btn btn-primary"
+                   th:href="@{/posts/{id}(id=${post.id})}">
+                    View
+                </a>
+            </div>
+        </article>
+    </section>
+</main>
+
+<footer>
+
+</footer>
+
+</body>
+</html>

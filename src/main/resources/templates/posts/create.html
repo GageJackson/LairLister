@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html lang="en">
+<head th:replace="~{partials/partials :: head}"></head>
+
+<body>
+<header th:replace="~{partials/partials :: header}"></header>
+
+  <main class="container">
+    <h1>Create a new post</h1>
+    <section class="row gap-3">
+      <form th:action="@{/posts/create}" th:method="post" th:object="${post}">
+        <div class="form-floating mb-3">
+          <input th:field="*{title}" type="text" class="form-control" id="floatingTitle" placeholder="Title" name="title">
+          <label for="floatingTitle">Title</label>
+        </div>
+        <div class="form-floating">
+          <textarea th:field="*{body}" class="form-control" placeholder="Body Text" id="floatingBody" name="body"></textarea>
+          <label for="floatingBody">Body Text</label>
+        </div>
+        <button type="submit" class="btn btn-primary">Submit</button>
+      </form>
+    </section>
+  </main>
+
+</body>
+</html>
