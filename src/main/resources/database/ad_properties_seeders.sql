@@ -1,4 +1,4 @@
-USE lair_lister_db;
+USE lairLister_db;
 
 INSERT INTO ad_statuses(name)
 VALUES ('Active'),

@@ -2,6 +2,8 @@ package com.gagejackson.lairlister.Models;
 
 import jakarta.persistence.*;
 
+import java.util.List;
+
 @Entity
 @Table(name="lair_types")
 public class LairType {
@@ -12,6 +14,9 @@ public class LairType {
 
     @Column(nullable = false, length = 100)
     private String name;
+
+    @OneToMany(cascade = CascadeType.ALL, mappedBy = "lairType")
+    private List<Lair> lair;
 
     /*
     -----------------------------------------

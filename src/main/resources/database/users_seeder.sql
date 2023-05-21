@@ -1,4 +1,4 @@
-USE lair_lister_db;
+USE lairLister_db;
 INSERT INTO users (username, name, email, password, profile_image, bio)
 VALUES ('DrMalicious', 'Dr. Malicious', 'dr.malicious@evil.com', 'M4d$C13n71$7', 'malicious.jpg', 'Greetings, puny mortals! I am Dr. Malicious, the mad scientist with a passion for chaos and destruction! With my army of loyal minions, I will bring the world to its knees!'),
        ('ProfChaos', 'Professor Chaos', 'prof.chaos@evil.com', 'iLOVEkittens!88', 'chaos.jpg', 'Ha ha ha! I am Professor Chaos, the brilliant-but-unstable scientist who loves nothing more than causing mayhem and destruction! With my latest invention, I will finally conquer the world!'),
@@ -8,6 +8,3 @@ VALUES ('DrMalicious', 'Dr. Malicious', 'dr.malicious@evil.com', 'M4d$C13n71$7',
        ('ShadowQueen', 'The Shadow Queen', 'shadow.queen@evil.com', 'iAmTheNight!', 'shadow.jpg', 'Fear me, mortals! I am the Shadow King, the supernatural entity who feeds on your terror! With my power to manipulate reality, I will turn your worst nightmares into reality!'),
        ('BaronVonBloodlust', 'Baron Von Bloodlust', 'baron.v.bloodlust@evil.com', 'bloodIStasty66', 'bloodlust.jpg', 'I am Baron Von Bloodlust, the feared warlord with a bloodthirsty appetite for conquest and destruction! With my army of loyal soldiers, I will crush all who oppose me and rule the world with an iron fist!'),
        ('LadyDoom', 'Lady Doom', 'lady.doom@evil.com', 'doooooooooom', 'doom.jpg', 'Bow down before me, weaklings! I am Lady Doom, the sorceress with a thirst for power! With my dark magic and cunning, I will conquer all who stand in my way and make the world my domain!');
-
-INSERT INTO user_ad_assignments(user_id, ad_id)
-VALUES (6,1),(6,2),(6,3),(2,4),(7,5),(3,6),(5,7),(1,8),(8,9),(1,10),(7,11),(5,12),(2,13),(8,14),(1,15),(5,16),(4,17),(8,18),(5,19),(2,20),(4,21),(1,22),(4,23),(5,24),(3,25),(3,26),(7,27),(1,28),(2,29),(8,30),(5,31),(3,32),(4,33),(8,34),(4,35);

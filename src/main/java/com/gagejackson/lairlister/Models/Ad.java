@@ -24,20 +24,26 @@ public class Ad {
     @Column(nullable = false)
     private long price;
 
-    @Column(nullable = false, length = 255)
+    @Column(nullable = false)
     private Date created_at;
 
-    @Column(nullable = false, length = 255)
+    @Column(nullable = false)
     private Date last_status_change;
 
     @Column(nullable = false)
     private boolean featured;
 
-    @OneToOne
-    private AdLocation ad_location_id;
+    @ManyToOne
+    @JoinColumn (name = "ad_location_id")
+    private AdLocation ad_location;
 
-    @OneToOne
-    private AdStatus ad_status_id;
+    @ManyToOne
+    @JoinColumn (name = "ad_status_id")
+    private AdStatus ad_status;
+
+    @ManyToOne
+    @JoinColumn (name = "user_id")
+    private User user;
 
     /*
     -----------------------------------------
@@ -45,7 +51,7 @@ public class Ad {
     -----------------------------------------
      */
     public Ad(){}
-    public Ad(long id, String title, String description, String description_short, long price, Date created_at, Date last_status_change, boolean featured, AdLocation ad_location_id, AdStatus ad_status_id) {
+    public Ad(long id, String title, String description, String description_short, long price, Date created_at, Date last_status_change, boolean featured, AdLocation ad_location, AdStatus ad_status) {
         this.id = id;
         this.title = title;
         this.description = description;
@@ -54,10 +60,10 @@ public class Ad {
         this.created_at = created_at;
         this.last_status_change = last_status_change;
         this.featured = featured;
-        this.ad_location_id = ad_location_id;
-        this.ad_status_id = ad_status_id;
+        this.ad_location = ad_location;
+        this.ad_status = ad_status;
     }
-    public Ad(String title, String description, String description_short, long price, Date created_at, Date last_status_change, boolean featured, AdLocation ad_location_id, AdStatus ad_status_id) {
+    public Ad(String title, String description, String description_short, long price, Date created_at, Date last_status_change, boolean featured, AdLocation ad_location, AdStatus ad_status) {
         this.title = title;
         this.description = description;
         this.description_short = description_short;
@@ -65,8 +71,8 @@ public class Ad {
         this.created_at = created_at;
         this.last_status_change = last_status_change;
         this.featured = featured;
-        this.ad_location_id = ad_location_id;
-        this.ad_status_id = ad_status_id;
+        this.ad_location = ad_location;
+        this.ad_status = ad_status;
     }
 
     /*
@@ -107,12 +113,12 @@ public class Ad {
         return featured;
     }
 
-    public AdLocation getAd_location_id() {
-        return ad_location_id;
+    public AdLocation getAd_location() {
+        return ad_location;
     }
 
-    public AdStatus getAd_status_id() {
-        return ad_status_id;
+    public AdStatus getAd_status() {
+        return ad_status;
     }
 
     /*
@@ -121,9 +127,7 @@ public class Ad {
     -----------------------------------------
      */
 
-    public void setId(long id) {
-        this.id = id;
-    }
+    public void setId(long id) {this.id = id;}
 
     public void setTitle(String title) {
         this.title = title;
@@ -153,11 +157,11 @@ public class Ad {
         this.featured = featured;
     }
 
-    public void setAd_location_id(AdLocation ad_location_id) {
-        this.ad_location_id = ad_location_id;
+    public void setAd_location(AdLocation ad_location) {
+        this.ad_location = ad_location;
     }
 
-    public void setAd_status_id(AdStatus ad_status_id) {
-        this.ad_status_id = ad_status_id;
+    public void setAd_status(AdStatus ad_status) {
+        this.ad_status = ad_status;
     }
 }

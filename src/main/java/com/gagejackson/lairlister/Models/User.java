@@ -2,6 +2,8 @@ package com.gagejackson.lairlister.Models;
 
 import jakarta.persistence.*;
 
+import java.util.List;
+
 @Entity
 @Table(name="users")
 public class User {
@@ -28,6 +30,8 @@ public class User {
     @Column(nullable = true, columnDefinition = "TEXT")
     private String bio;
 
+    @OneToMany(cascade = CascadeType.ALL, mappedBy = "user")
+    private List<Ad> ads;
 
 
     public User() {}

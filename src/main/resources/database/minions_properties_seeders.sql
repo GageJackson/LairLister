@@ -1,4 +1,4 @@
-USE lair_lister_db;
+USE lairLister_db;
 
 INSERT INTO minion_types(name)
 VALUES ('Demon'),
