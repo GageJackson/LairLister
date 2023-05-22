@@ -7,30 +7,30 @@
 </head>
 
 <header th:fragment="header" >
-  <nav class="navbar navbar-expand-lg bg-primary mb-5">
+  <nav class="navbar navbar-expand-lg bg-danger mb-5">
     <div class="container-fluid">
-      <a class="navbar-brand" href="/posts">Postmaster</a>
+      <a class="navbar-brand" href="/ads">LairLister</a>
       <button class="navbar-toggler" type="button" data-bs-toggle="offcanvas" data-bs-target="#offcanvasNavbar" aria-controls="offcanvasNavbar">
         <span class="navbar-toggler-icon"></span>
       </button>
       <div class="offcanvas offcanvas-end" tabindex="-1" id="offcanvasNavbar" aria-labelledby="offcanvasNavbarLabel">
         <div class="offcanvas-header">
-          <h5 class="offcanvas-title" id="offcanvasNavbarLabel">PostMaster</h5>
+          <h5 class="offcanvas-title" id="offcanvasNavbarLabel">LairLister</h5>
           <button type="button" class="btn-close" data-bs-dismiss="offcanvas" aria-label="Close"></button>
         </div>
         <div class="offcanvas-body">
           <ul class="navbar-nav justify-content-end flex-grow-1 pe-3">
             <li class="nav-item">
-              <a class="nav-link" href="/posts">Your Posts</a>
+              <a class="nav-link" href="/ads">Ads</a>
             </li>
             <li class="nav-item">
-              <a class="nav-link" href="/posts/create">Create Post</a>
+              <a class="nav-link" href="/ads/create">Create Ad</a>
             </li>
-            <li>
-              <form th:action="@{/logout}" th:method="post">
-                <button class="btn-link btn" style="margin-top: 8px">Logout</button>
-              </form>
-            </li>
+<!--            <li>-->
+<!--              <form th:action="@{/logout}" th:method="post">-->
+<!--                <button class="btn-link btn" style="margin-top: 8px">Logout</button>-->
+<!--              </form>-->
+<!--            </li>-->
           </ul>
         </div>
       </div>

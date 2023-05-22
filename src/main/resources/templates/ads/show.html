@@ -1,17 +1,20 @@
 <!DOCTYPE html>
 <html lang="en">
 <head th:replace="~{partials/partials :: head}"></head>
-<body>
+<body class="bg-dark">
 <header th:replace="~{partials/partials :: header}"></header>
 <main class="container">
-    <h1>Ad</h1>
-    <section class="row gap-3">
-        <article class="card col-12 p-0">
-            <div class="card-header">
-                <h3 th:text="${ad.title}" ></h3>
+    <h1 th:text="${ad.title}" class="text-danger">Ad Title</h1>
+    <section>
+        <article class="card p-0 border-0 mb-3 bg-dark bg-opacity-100">
+            <div class="card-header p-0">
+                <img th:src="@{/img/{imageName}(imageName=${item.image})}" class="img-fluid">
             </div>
-            <div class="card-body">
-                <p th:text="${ad.description}"></p>
+            <div class="card-body p-0 bg-dark bg-opacity-100 border-0">
+                <h3 th:text="${item.name}"  class="text-danger"></h3>
+                <p th:text="${ad.description}" class="text-light"></p>
+                <p th:text="'$' + ${ad.price}" class="text-light"></p>
+
             </div>
         </article>
     </section>

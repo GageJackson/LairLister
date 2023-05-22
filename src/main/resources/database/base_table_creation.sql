@@ -1,4 +1,4 @@
-USE lair_lister_db;
+USE lairLister_db;
 DROP TABLE IF EXISTS minion_skill_assignments;
 DROP TABLE IF EXISTS lair_amenity_assignments;
 DROP TABLE IF EXISTS user_ad_assignments;
