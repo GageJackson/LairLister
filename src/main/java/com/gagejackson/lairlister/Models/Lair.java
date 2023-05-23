@@ -41,18 +41,20 @@ public class Lair {
     -----------------------------------------
      */
     public Lair() {}
-    public Lair(Item item, LairType lairType, LairSize lairSize, LairSecurity lairSecurity) {
-        this.item = item;
-        this.lairType = lairType;
-        this.lairSize = lairSize;
-        this.lairSecurity = lairSecurity;
-    }
-    public Lair(long id, Item item, LairType lairType, LairSize lairSize, LairSecurity lairSecurity) {
+    public Lair(long id, Item item, LairType lairType, LairSize lairSize, LairSecurity lairSecurity, List<LairAmenity> lairAmenities) {
         this.id = id;
         this.item = item;
         this.lairType = lairType;
         this.lairSize = lairSize;
         this.lairSecurity = lairSecurity;
+        this.lairAmenities = lairAmenities;
+    }
+    public Lair(Item item, LairType lairType, LairSize lairSize, LairSecurity lairSecurity, List<LairAmenity> lairAmenities) {
+        this.item = item;
+        this.lairType = lairType;
+        this.lairSize = lairSize;
+        this.lairSecurity = lairSecurity;
+        this.lairAmenities = lairAmenities;
     }
 
     /*
@@ -80,11 +82,13 @@ public class Lair {
         return lairSecurity;
     }
 
+    public List<LairAmenity> getLairAmenities() {return lairAmenities;}
+
     /*
-    -----------------------------------------
-    SETTERS
-    -----------------------------------------
-     */
+        -----------------------------------------
+        SETTERS
+        -----------------------------------------
+         */
     public void setId(long id) {
         this.id = id;
     }
@@ -104,4 +108,6 @@ public class Lair {
     public void setLairSecurity(LairSecurity lairSecurity) {
         this.lairSecurity = lairSecurity;
     }
+
+    public void setLairAmenities(List<LairAmenity> lairAmenities) {this.lairAmenities = lairAmenities;}
 }

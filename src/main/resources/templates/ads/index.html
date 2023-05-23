@@ -6,23 +6,26 @@
 <header th:replace="~{partials/partials :: header}"></header>
 
 <main class="container">
-    <h1>Ads</h1>
-    <section th:with="adsSize=${#numbers.sequence(0, allAds.size()-1)}" class="row gap-4">
-        <article th:each="index : ${adsSize}" class="card col-3 p-0 border-0 mb-3 bg-dark bg-opacity-100">
-            <div class="card-header p-0 bg-dark bg-opacity-100 border-0">
-                <img th:src="@{/img/{imageName}(imageName=${allItems[index].image})}" class="img-fluid">
-            </div>
-            <div class="card-body bg-dark bg-opacity-100 p-0 border-0 mt-2">
-                <h6 th:text="${allAds[index].title}" class="text-danger"></h6>
-                <p th:text="${allAds[index].description_short}" class="text-light"></p>
-            </div>
-            <div class="card-footer bg-dark bg-opacity-100 p-0 border-0">
-                <a href="#" type="button" class="btn btn-danger"
-                   th:href="@{/ads/{id}(id=${allAds[index].id})}">
-                    View
-                </a>
-            </div>
-        </article>
+    <h1 class="text-light">Ads</h1>
+    <section th:with="adsSize=${#numbers.sequence(0, allAds.size()-1)}" class="row row-cols-2 row-cols-lg-4 gx-4 gy-5">
+        <div  th:each="index : ${adsSize}" class="col">
+            <article class="card p-0 border-0 mb-3 bg-dark bg-opacity-100 h-100">
+                <div class="card-header p-0 bg-dark bg-opacity-100 border-0">
+                    <img th:src="@{/img/{imageName}(imageName=${allItems[index].image})}" class="img-fluid">
+                </div>
+                <div class="card-body bg-dark bg-opacity-100 p-2 border-0 mt-2">
+                    <h6 th:text="${allAds[index].title}" class="text-danger"></h6>
+                    <p th:text="${allAds[index].description_short}" class="text-light"></p>
+                </div>
+                <div class="card-footer bg-dark bg-opacity-100 p-2 border-0">
+                    <a href="#" type="button" class="btn btn-danger"
+                       th:href="@{/ads/{id}(id=${allAds[index].id})}">
+                        View
+                    </a>
+                </div>
+            </article>
+        </div>
+
     </section>
 </main>
 

@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html lang="en">
+<head th:replace="~{partials/partials :: head}"></head>
+
+<body class="bg-dark">
+<header th:replace="~{partials/partials :: header}"></header>
+
+  <main class="container">
+    <h1>What nefarious evil are you imposing upon this site?</h1>
+    <section class="row row-cols-2 gx-4 gy-5">
+      <div class="col">
+        <a href="#" type="button" class="btn btn-danger"
+        th:href="@{/ads/create/lair}">
+          <img th:src="@{/img/dark_cathedral.webp}" class="img-fluid" alt="create lair button">
+        </a>
+        <h2 class="text-light">A Sinister Lair?</h2>
+      </div>
+      <div class="col">
+        <a href="#" type="button" class="btn btn-danger"
+           th:href="@{/ads/create/minion}">
+          <img th:src="@{/img/Azazel.webp}" class="img-fluid" alt="create minion button">
+        </a>
+        <h2 class="text-light">A Mighty Minion?</h2>
+      </div>
+    </section>
+  </main>
+
+</body>
+</html>

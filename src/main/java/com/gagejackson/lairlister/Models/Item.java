@@ -92,7 +92,7 @@ public class Item {
         this.ad = ad;
     }
 
-    public void setItem(ItemType itemType) {
+    public void setItemType(ItemType itemType) {
         this.itemType = itemType;
     }
 }

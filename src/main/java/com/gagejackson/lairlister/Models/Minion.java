@@ -44,28 +44,26 @@ public class Minion {
     -----------------------------------------
      */
     public Minion() {}
-    public Minion(Item item, MinionType minionType, MinionSize minionSize, MinionLevel minionLevel, MinionClass minionClass) {
+    public Minion(Item item, MinionType minionType, MinionSize minionSize, MinionLevel minionLevel, MinionClass minionClass, List<MinionSkill> minionSkills) {
         this.item = item;
         this.minionType = minionType;
         this.minionSize = minionSize;
         this.minionLevel = minionLevel;
         this.minionClass = minionClass;
+        this.minionSkills = minionSkills;
     }
-    public Minion(long id, Item item, MinionType minionType, MinionSize minionSize, MinionLevel minionLevel, MinionClass minionClass) {
+    public Minion(long id, Item item, MinionType minionType, MinionSize minionSize, MinionLevel minionLevel, MinionClass minionClass, List<MinionSkill> minionSkills) {
         this.id = id;
         this.item = item;
         this.minionType = minionType;
         this.minionSize = minionSize;
         this.minionLevel = minionLevel;
         this.minionClass = minionClass;
+        this.minionSkills = minionSkills;
     }
-
-    /*
-    -----------------------------------------
+    /*-----------------------------------------
     GETTERS
-    -----------------------------------------
-     */
-
+    -----------------------------------------*/
     public long getId() {
         return id;
     }
@@ -90,12 +88,11 @@ public class Minion {
         return minionClass;
     }
 
-    /*
-    -----------------------------------------
-    SETTERS
-    -----------------------------------------
-     */
+    public List<MinionSkill> getMinionSkills() {return minionSkills;}
 
+    /*-----------------------------------------
+    SETTERS
+    -----------------------------------------*/
     public void setId(long id) {
         this.id = id;
     }
@@ -119,4 +116,6 @@ public class Minion {
     public void setMinionClass(MinionClass minionClass) {
         this.minionClass = minionClass;
     }
+
+    public void setMinionSkills(List<MinionSkill> minionSkills) {this.minionSkills = minionSkills;}
 }

@@ -51,6 +51,10 @@ public class Ad {
     -----------------------------------------
      */
     public Ad(){}
+    public Ad(Date created_at, Date last_status_change){
+        this.created_at = created_at;
+        this.last_status_change = last_status_change;
+    }
     public Ad(long id, String title, String description, String description_short, long price, Date created_at, Date last_status_change, boolean featured, AdLocation ad_location, AdStatus ad_status) {
         this.id = id;
         this.title = title;

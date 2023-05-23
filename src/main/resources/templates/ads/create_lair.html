@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html lang="en">
+<head th:replace="~{partials/partials :: head}"></head>
+
+<body class="bg-dark">
+<header th:replace="~{partials/partials :: header}"></header>
+
+<main class="container">
+    <h1>Create a new ad</h1>
+    <section class="row gap-3">
+        <form th:action="@{/templates/ads/create}" th:method="post">
+            <div class="form-floating mb-3">
+                <input th:field="*{title}" type="text" class="form-control" id="floatingTitle" placeholder="Tagline" name="title">
+                <label for="floatingTitle">Title</label>
+            </div>
+            <div class="form-floating mb-3">
+                <input th:field="*{price}" type="text" class="form-control" id="floatingPrice" placeholder="Price" name="price">
+                <label for="floatingPrice">Price</label>
+            </div>
+            <div class="form-floating mb-3">
+                <input th:field="${item.name}" type="text" class="form-control" id="floatingName" placeholder="Item's Name" name="name">
+                <label for="floatingName">Item's Name</label>
+            </div>
+            <div class="form-floating mb-3">
+                <label for="itemSelect">Title</label>
+                <select th:field="${item.name}" type="s" class="form-control" id="itemSelect" placeholder="Item's Name" name="name">
+                    <option>Lair</option>
+                    <option>Minion</option>
+                </select>
+            </div>
+            <div class="form-floating">
+                <textarea th:field="*{description_short}" class="form-control" placeholder="Short Description 220 Chars" id="floatingDescriptionShort" name="description_short"></textarea>
+                <label for="floatingDescriptionShort">Short Description 220 Chars</label>
+            </div>
+            <div class="form-floating">
+                <textarea th:field="*{description}" class="form-control" placeholder="Description" id="floatingDescription" name="description"></textarea>
+                <label for="floatingDescription">Description</label>
+            </div>
+            <button type="submit" class="btn btn-primary">Submit</button>
+        </form>
+    </section>
+</main>
+
+</body>
+</html>
