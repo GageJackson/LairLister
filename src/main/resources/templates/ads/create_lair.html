@@ -5,41 +5,58 @@
 <body class="bg-dark">
 <header th:replace="~{partials/partials :: header}"></header>
 
-<main class="container">
-    <h1>Create a new ad</h1>
+<main class="container mt-5">
+    <h1>Add your Nefarious Lair!</h1>
     <section class="row gap-3">
-        <form th:action="@{/templates/ads/create}" th:method="post">
+        <form th:action="@{/ads/create/lair}" th:method="post">
+            <h2 class="text-light">Your Lair's Name</h2>
             <div class="form-floating mb-3">
-                <input th:field="*{title}" type="text" class="form-control" id="floatingTitle" placeholder="Tagline" name="title">
-                <label for="floatingTitle">Title</label>
+                <input th:field="${item.name}" type="text" class="form-control" id="floatingName" placeholder="Lair's Name" name="name">
+                <label for="floatingName">Lair's Name</label>
             </div>
-            <div class="form-floating mb-3">
-                <input th:field="*{price}" type="text" class="form-control" id="floatingPrice" placeholder="Price" name="price">
-                <label for="floatingPrice">Price</label>
+            <div class="mb-3">
+                <h3 class="text-light">Size</h3>
+                <div th:each="size : ${lairSizes}" th:remove="tag">
+                    <label class="radio-button">
+                        <input type="radio" name="minion_size" th:field="${lair.lairSize}" th:value="${size.id}" th:text="${size.name}">
+                    </label>
+                </div>
             </div>
-            <div class="form-floating mb-3">
-                <input th:field="${item.name}" type="text" class="form-control" id="floatingName" placeholder="Item's Name" name="name">
-                <label for="floatingName">Item's Name</label>
+            <div class="mb-3">
+                <h3 class="text-light">Type</h3>
+                <div th:each="type : ${lairTypes}" th:remove="tag">
+                    <label class="radio-button">
+                        <input type="radio" name="minion_type" th:field="${lair.lairType}" th:value="${type.id}" th:text="${type.name}">
+                    </label>
+                </div>
             </div>
-            <div class="form-floating mb-3">
-                <label for="itemSelect">Title</label>
-                <select th:field="${item.name}" type="s" class="form-control" id="itemSelect" placeholder="Item's Name" name="name">
-                    <option>Lair</option>
-                    <option>Minion</option>
-                </select>
+            <div class="mb-3">
+                <h3 class="text-light">Security Level</h3>
+                <div th:each="security : ${lairSecurities}" th:remove="tag">
+                    <label class="radio-button">
+                        <input type="radio" name="minion_security" th:field="${lair.lairSecurity}" th:value="${security.id}" th:text="${security.name}" class="text-light">
+                    </label>
+                </div>
             </div>
-            <div class="form-floating">
-                <textarea th:field="*{description_short}" class="form-control" placeholder="Short Description 220 Chars" id="floatingDescriptionShort" name="description_short"></textarea>
-                <label for="floatingDescriptionShort">Short Description 220 Chars</label>
+            <div class="mb-3">
+                <h3 class="text-light">Amenities</h3>
+                <div th:each="amenity : ${lairAmenities}" th:remove="tag">
+                    <label class="radio-button">
+                        <input type="checkbox" name="lair_amenity" th:value="${amenity.id}" th:text="${amenity.name}" class="text-light">
+                    </label>
+                </div>
             </div>
-            <div class="form-floating">
-                <textarea th:field="*{description}" class="form-control" placeholder="Description" id="floatingDescription" name="description"></textarea>
-                <label for="floatingDescription">Description</label>
+
+            <input type="hidden" name="newItemImage" value="frozen_fortress.webp">
+
+
+
+
+            <div class="mb-3">
+                <button type="submit" class="btn btn-danger">Submit</button>
             </div>
-            <button type="submit" class="btn btn-primary">Submit</button>
         </form>
     </section>
 </main>
-
 </body>
 </html>

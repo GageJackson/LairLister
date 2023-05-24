@@ -9,91 +9,143 @@
     <h1>Create a new ad</h1>
     <section class="row gap-3">
         <form th:action="@{/ads/create/minion}" th:method="post">
-            <h2 class="text-light">Your Minion's Name</h2>
-            <div class="form-floating mb-3">
-                <input th:field="${item.name}" type="text" class="form-control" id="floatingName" placeholder="Minion's Name" name="name">
-                <label for="floatingName">Minion's Name</label>
-            </div>
-            <div class="mb-3">
-                <h3 class="text-light">Size</h3>
-                <div th:each="size : ${minionSizes}" th:remove="tag">
-                    <label class="radio-button">
-                        <input type="radio" name="minion_size" th:field="${minion.minionSize}" th:value="${size.id}" th:text="${size.name}">
-                    </label>
-                </div>
-            </div>
-            <div class="mb-3">
-                <h3 class="text-light">Race</h3>
-                <div th:each="type : ${minionTypes}" th:remove="tag">
-                    <label class="radio-button">
-                        <input type="radio" name="minion_type" th:field="${minion.minionType}" th:value="${type.id}" th:text="${type.name}">
-                    </label>
-                </div>
-            </div>
-            <div class="mb-3">
-                <h3 class="text-light">Class</h3>
-                <div th:each="class : ${minionClasses}" th:remove="tag">
-                    <label class="radio-button" th:for="${'class'+class.id}">
-                        <input type="radio" name="minion_class" th:field="${minion.minionClass}" th:id="${'class'+class.id}" th:value="${class.id}" th:text="${class.name}" class="text-light">
-                    </label>
-                </div>
-            </div>
-            <div class="mb-3">
-                <h3 class="text-light">Power Level</h3>
-                <div th:each="level : ${minionLevels}" th:remove="tag">
-                    <label class="radio-button">
-                        <input type="radio" name="minion_level" th:field="${minion.minionLevel}" th:value="${level.id}" th:text="${level.name}" class="text-light">
-                    </label>
-                </div>
-            </div>
-            <div class="mb-3">
-                <h3 class="text-light">Skills</h3>
-                <div th:each="skill : ${minionSkills}" th:remove="tag">
-                    <label class="radio-button">
-                        <input type="checkbox" name="minion_skill" th:value="${skill.id}" th:text="${skill.name}" class="text-light">
-                    </label>
-                </div>
-            </div>
+            <nav>
+                <ul class="nav nav-pills mb-3" id="pills-tab" role="tablist">
+                    <li class="nav-item" role="presentation">
+                        <button class="nav-link active" id="minion-tab" data-bs-toggle="pill" data-bs-target="#minion-section"
+                                type="button" role="tab" aria-controls="pills-minionInfo" aria-selected="true">Create Minion</button>
+                    </li>
+                    <li class="nav-item" role="presentation">
+                        <button class="nav-link" id="skills-tab" data-bs-toggle="pill" data-bs-target="#skills-section"
+                                type="button" role="tab" aria-controls="pills-minionSkills" aria-selected="false">Add Skills</button>
+                    </li>
+                    <li class="nav-item" role="presentation">
+                        <button class="nav-link" id="ad-tab" data-bs-toggle="pill" data-bs-target="#ad-section"
+                                type="button" role="tab" aria-controls="pills-minionAd" aria-selected="false">Finish Ad</button>
+                    </li>
+                </ul>
+            </nav>
 
-            <div class="form-floating mb-3">
-                <input th:field="${ad.title}" type="text" class="form-control" id="floatingTitle" placeholder="Tagline" name="title">
-                <label for="floatingTitle">Title</label>
+            <div class="tab-content" id="pills-tabContent">
+                <section class="tab-pane fade show active" id="minion-section" role="tabpanel" aria-labelledby="minion-tab" tabindex="0">
+                    <h2 class="text-light">Your Minion's Name</h2>
+                    <div class="form-floating mb-3">
+                        <input th:field="${item.name}" type="text" class="form-control" id="floatingName" placeholder="Minion's Name" name="name">
+                        <label for="floatingName">Minion's Name</label>
+                    </div>
+
+                    <div class="mb-3">
+                        <h3 class="text-light">Size</h3>
+                        <div th:each="size : ${minionSizes}" th:remove="tag">
+                            <label class="radio-button">
+                                <input type="radio" name="minion_size" th:field="${minion.minionSize}" th:value="${size.id}" th:text="${size.name}">
+                            </label>
+                        </div>
+                    </div>
+
+                    <div class="mb-3">
+                        <h3 class="text-light">Race</h3>
+                        <div th:each="type : ${minionTypes}" th:remove="tag">
+                            <label class="radio-button">
+                                <input type="radio" name="minion_type" th:field="${minion.minionType}" th:value="${type.id}" th:text="${type.name}">
+                            </label>
+                        </div>
+                    </div>
+
+                    <div class="mb-3">
+                        <h3 class="text-light">Class</h3>
+                        <div th:each="class : ${minionClasses}" th:remove="tag">
+                            <label class="radio-button" th:for="${'class'+class.id}">
+                                <input type="radio" name="minion_class" th:field="${minion.minionClass}" th:id="${'class'+class.id}" th:value="${class.id}" th:text="${class.name}" class="text-light">
+                            </label>
+                        </div>
+                    </div>
+
+                    <div class="mb-3">
+                        <h3 class="text-light">Power Level</h3>
+                        <div th:each="level : ${minionLevels}" th:remove="tag">
+                            <label class="radio-button">
+                                <input type="radio" name="minion_level" th:field="${minion.minionLevel}" th:value="${level.id}" th:text="${level.name}" class="text-light">
+                            </label>
+                        </div>
+                    </div>
+                </section>
+
+                <section class="tab-pane fade" id="skills-section" role="tabpanel" aria-labelledby="skills-tab" tabindex="0">
+                    <h2 class="text-light">Your Minion's Skills & Location</h2>
+                    <div class="mb-3">
+                        <h3 class="text-light">Skills</h3>
+                        <div th:each="skill : ${minionSkills}" th:remove="tag">
+                            <label class="radio-button">
+                                <input type="checkbox" name="minion_skill" th:value="${skill.id}" th:text="${skill.name}" class="text-light">
+                            </label>
+                        </div>
+                    </div>
+
+                    <div class="mb-3">
+                        <h3 class="text-light">Location</h3>
+                        <div th:each="location : ${adLocations}" th:remove="tag">
+                            <label class="radio-button">
+                                <input type="radio" name="ad_location" th:field="${ad.ad_location}" th:value="${location.id}" th:text="${location.name}" class="text-light">
+                            </label>
+                        </div>
+                    </div>
+                </section>
+
+                <section class="tab-pane fade" id="ad-section" role="tabpanel" aria-labelledby="ad-tab" tabindex="0">
+                    <div class="form-floating mb-3">
+                        <input th:field="${ad.title}" type="text" class="form-control" id="floatingTitle" placeholder="Tagline" name="title">
+                        <label for="floatingTitle">Title</label>
+                    </div>
+                    <div class="form-floating mb-3">
+                        <input th:field="*{ad.price}" type="number" class="form-control" id="floatingPrice" placeholder="Price" name="price">
+                        <label for="floatingPrice">Price</label>
+                    </div>
+                    <div class="form-floating">
+                        <textarea th:field="*{ad.description_short}" class="form-control" placeholder="Short Description 220 Chars" id="floatingDescriptionShort" name="description_short" maxlength="220"></textarea>
+                        <label for="floatingDescriptionShort">Short Description 220 Chars</label>
+                    </div>
+                    <div class="form-floating">
+                        <textarea th:field="*{ad.description}" class="form-control" placeholder="Description" id="floatingDescription" name="description"></textarea>
+                        <label for="floatingDescription">Description</label>
+                    </div>
+
+                    <div class="mb-3 row d-flex justify-content-end">
+                        <button type="submit" class="btn btn-danger">Submit</button>
+                    </div>
+                </section>
+
+                <div class="mb-3 row d-flex justify-content-between">
+                    <button class="btn btn-danger" id="prev-btn" type="button">Previous</button>
+                    <button class="btn btn-danger" id="next-btn" type="button">Next</button>
+                </div>
             </div>
-            <div class="form-floating mb-3">
-                <input th:field="*{ad.price}" type="number" class="form-control" id="floatingPrice" placeholder="Price" name="price">
-                <label for="floatingPrice">Price</label>
-            </div>
-            <div class="form-floating">
-                <textarea th:field="*{ad.description_short}" class="form-control" placeholder="Short Description 220 Chars" id="floatingDescriptionShort" name="description_short" maxlength="220"></textarea>
-                <label for="floatingDescriptionShort">Short Description 220 Chars</label>
-            </div>
-            <div class="form-floating">
-                <textarea th:field="*{ad.description}" class="form-control" placeholder="Description" id="floatingDescription" name="description"></textarea>
-                <label for="floatingDescription">Description</label>
-            </div>
-<!--            <div class="form-floating mb-3">-->
-<!--                <input th:field="*{ad.ad_location}" type="number" class="form-control" id="floatingLocation" placeholder="location" name="location">-->
-<!--                <label for="floatingLocation">location</label>-->
-<!--            </div>-->
-<!--            <div class="form-floating mb-3">-->
-<!--                <input th:field="*{ad.ad_status}" type="number" class="form-control" id="floatingStatus" placeholder="status" name="status">-->
-<!--                <label for="floatingStatus">status</label>-->
-<!--            </div>-->
 
             <input type="hidden" th:field="*{ad.created_at}" th:value="${ad.created_at}">
             <input type="hidden" th:field="*{ad.last_status_change}" th:value="${ad.last_status_change}">
             <input type="hidden" th:field="*{ad.featured}" th:value="${false}">
-<!--            <input type="hidden" th:field="*{item.image}" th:value="'Gork.webp'">-->
             <input type="hidden" name="newItemImage" value="Gork.webp">
 
-
-
-
-            <div class="mb-3">
-                <button type="submit" class="btn btn-danger">Submit</button>
-            </div>
         </form>
     </section>
 </main>
+
+<script>
+    document.getElementById('prev-btn').addEventListener('click', function() {
+        const activeTab = document.querySelector('.nav-link.active');
+        const prevTab = activeTab.parentElement.previousElementSibling.querySelector('.nav-link');
+        if (prevTab) {
+            prevTab.click();
+        }
+    });
+
+    document.getElementById('next-btn').addEventListener('click', function() {
+        const activeTab = document.querySelector('.nav-link.active');
+        const nextTab = activeTab.parentElement.nextElementSibling.querySelector('.nav-link');
+        if (nextTab) {
+            nextTab.click();
+        }
+    });
+</script>
 </body>
 </html>

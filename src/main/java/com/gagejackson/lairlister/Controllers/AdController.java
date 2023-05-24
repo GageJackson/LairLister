@@ -5,6 +5,7 @@ import com.gagejackson.lairlister.Repositories.*;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
+import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import java.util.*;
 
@@ -12,8 +13,13 @@ import java.util.*;
 public class AdController {
 
     private final AdRepository adDao;
+    private final AdLocationRepository adLocationDao;
     private final ItemRepository itemDao;
     private final LairRepository lairDao;
+    private final LairAmenityRepository lairAmenityDao;
+    private final LairSecurityRepository lairSecurityDao;
+    private final LairSizeRepository lairSizeDao;
+    private final LairTypeRepository lairTypeDao;
     private final MinionRepository minionDao;
     private final MinionClassRepository minionClassDao;
     private final MinionLevelRepository minionLevelDao;
@@ -21,14 +27,23 @@ public class AdController {
     private final MinionSkillRepository minionSkillDao;
     private final MinionTypeRepository minionTypeDao;
 
-    public AdController(AdRepository adDao, ItemRepository itemDao, LairRepository lairDao,
+    public AdController(AdRepository adDao, AdLocationRepository adLocationDao,
+                        ItemRepository itemDao,
+                        LairRepository lairDao, LairAmenityRepository lairAmenityDao,
+                        LairSecurityRepository lairSecurityDao, LairSizeRepository lairSizeDao,
+                        LairTypeRepository lairTypeDao,
                         MinionRepository minionDao, MinionClassRepository minionClassDao,
                         MinionLevelRepository minionLevelDao, MinionSizeRepository minionSizeDao,
                         MinionSkillRepository minionSkillDao, MinionTypeRepository minionTypeDao) {
 
         this.adDao = adDao;
+        this.adLocationDao = adLocationDao;
         this.itemDao = itemDao;
         this.lairDao = lairDao;
+        this.lairAmenityDao = lairAmenityDao;
+        this.lairSecurityDao = lairSecurityDao;
+        this.lairSizeDao = lairSizeDao;
+        this.lairTypeDao = lairTypeDao;
         this.minionDao = minionDao;
         this.minionClassDao = minionClassDao;
         this.minionLevelDao = minionLevelDao;
@@ -48,8 +63,82 @@ public class AdController {
     public String showCreateLairForm(Model model){
         model.addAttribute("item", new Item());
         model.addAttribute("lair", new Lair());
+        model.addAttribute("lairAmenities", lairAmenityDao.findAll());
+        model.addAttribute("lairSecurities", lairSecurityDao.findAll());
+        model.addAttribute("lairSizes", lairSizeDao.findAll());
+        model.addAttribute("lairTypes", lairTypeDao.findAll());
 
         return "/ads/create_lair";
+    }
+
+    @PostMapping("/ads/create/lair")
+    public String create(@ModelAttribute Item item,
+                         @ModelAttribute Lair lair,
+                         @RequestParam("newItemImage") String itemImage,
+                         @RequestParam("lair_amenity")List<Long> lairAmenityIds,
+                         RedirectAttributes redirectAttributes){
+
+        ItemType itemType = new ItemType();
+        itemType.setId(1);
+        item.setItemType(itemType);
+
+        item.setImage(itemImage);
+
+        List<LairAmenity> lairAmenities = new ArrayList<>();
+        for (long lairAmenityId : lairAmenityIds) {
+            Optional<LairAmenity> optionalLairAmenity = lairAmenityDao.findById(lairAmenityId);
+            optionalLairAmenity.ifPresent(lairAmenities::add);
+        }
+        lair.setLairAmenities(lairAmenities);
+
+        redirectAttributes.addFlashAttribute("item", item);
+        redirectAttributes.addFlashAttribute("lair", lair);
+
+        return "redirect:/ads/create/lair/ad";
+    }
+
+    @GetMapping("/ads/create/lair/ad")
+    public String showAdPage(@ModelAttribute("item") Item item,
+                             @ModelAttribute("lair") Lair lair,
+                             Model model) {
+
+        Date currentDate = Calendar.getInstance().getTime();
+        model.addAttribute("currentDate", currentDate);
+        model.addAttribute("ad", new Ad(currentDate, currentDate));
+        model.addAttribute("adLocations", adLocationDao.findAll());
+
+        return "/ads/create_ad";
+    }
+
+    @PostMapping("/ads/create/lair/ad")
+    public String create(@ModelAttribute Ad ad,
+                         @ModelAttribute Item item,
+                         @ModelAttribute Lair lair,
+                         @RequestParam("lair_amenity")List<Long> lairAmenityIds){
+
+        AdStatus adStatus = new AdStatus();
+        adStatus.setId(1);
+        ad.setAd_status(adStatus);
+
+        ItemType itemType = new ItemType();
+        itemType.setId(1);
+        item.setItemType(itemType);
+
+        List<LairAmenity> lairAmenities = new ArrayList<>();
+        for (long lairAmenityId : lairAmenityIds) {
+            Optional<LairAmenity> optionalLairAmenity = lairAmenityDao.findById(lairAmenityId);
+            optionalLairAmenity.ifPresent(lairAmenities::add);
+        }
+        lair.setLairAmenities(lairAmenities);
+
+        item.setAd(ad);
+        lair.setItem(item);
+
+        adDao.save(ad);
+        itemDao.save(item);
+        lairDao.save(lair);
+
+        return "redirect:/ads";
     }
 
     @GetMapping("/ads/create/minion")
@@ -57,6 +146,7 @@ public class AdController {
         Date currentDate = Calendar.getInstance().getTime();
         model.addAttribute("currentDate", currentDate);
         model.addAttribute("ad", new Ad(currentDate, currentDate));
+        model.addAttribute("adLocations", adLocationDao.findAll());
         model.addAttribute("item", new Item());
         model.addAttribute("minion", new Minion());
         model.addAttribute("minionClasses", minionClassDao.findAll());

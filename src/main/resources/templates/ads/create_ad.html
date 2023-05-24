@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html lang="en">
+<head th:replace="~{partials/partials :: head}"></head>
+
+<body class="bg-dark">
+<header th:replace="~{partials/partials :: header}"></header>
+
+<main class="container mt-5">
+    <h1>Create a new ad</h1>
+    <section class="row gap-3">
+        <form th:action="@{/ads/create/lair/ad}" th:method="post">
+            <h2 class="text-light">Your Minion's Name</h2>
+
+            <div class="form-floating mb-3">
+                <input th:field="*{ad.title}" type="text" class="form-control" id="floatingTitle" placeholder="Tagline" name="title">
+                <label for="floatingTitle">Title</label>
+            </div>
+            <div class="form-floating mb-3">
+                <input th:field="*{ad.price}" type="number" class="form-control" id="floatingPrice" placeholder="Price" name="price">
+                <label for="floatingPrice">Price</label>
+            </div>
+            <div class="form-floating">
+                <textarea th:field="*{ad.description_short}" class="form-control" placeholder="Short Description 220 Chars" id="floatingDescriptionShort" name="description_short" maxlength="220"></textarea>
+                <label for="floatingDescriptionShort">Short Description 220 Chars</label>
+            </div>
+            <div class="form-floating">
+                <textarea th:field="*{ad.description}" class="form-control" placeholder="Description" id="floatingDescription" name="description"></textarea>
+                <label for="floatingDescription">Description</label>
+            </div>
+            <div class="mb-3">
+                <h3 class="text-light">Ad_location</h3>
+                <div th:each="location : ${adLocations}" th:remove="tag">
+                    <label class="radio-button">
+                        <input type="radio" name="ad_location" th:field="${ad.ad_location}" th:value="${location.id}" th:text="${location.name}" class="text-light">
+                    </label>
+                </div>
+            </div>
+
+            <input type="hidden" th:field="*{ad.created_at}" th:value="${ad.created_at}">
+            <input type="hidden" th:field="*{ad.last_status_change}" th:value="${ad.last_status_change}">
+            <input type="hidden" th:field="*{ad.featured}" th:value="${false}">
+
+
+            <input type="hidden" th:field="*{lair.lairType.id}" th:value="${lair.lairType.id}">
+            <input type="hidden" th:field="*{lair.lairSecurity.id}" th:value="${lair.lairSecurity.id}">
+            <input type="hidden" th:field="*{lair.lairSize.id}" th:value="${lair.lairSize.id}">
+
+
+            <input type="hidden" th:field="*{item.image}" th:value="${item.image}">
+            <input type="hidden" th:field="*{item.name}" th:value="${item.name}">
+            <input type="hidden" th:field="*{item.itemType}" th:value="${item.itemType}">
+
+
+            <div th:each="amenity : ${lair.lairAmenities}" th:remove="tag">
+                    <input type="hidden" name="lair_amenity" th:value="${amenity.id}" th:text="${amenity.name}" class="text-light">
+            </div>
+
+
+            <div class="mb-3">
+                <button type="submit" class="btn btn-danger">Submit</button>
+            </div>
+        </form>
+    </section>
+</main>
+</body>
+</html>
