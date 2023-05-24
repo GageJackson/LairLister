@@ -4,14 +4,9 @@ import com.gagejackson.lairlister.Models.*;
 import com.gagejackson.lairlister.Repositories.*;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.ModelAttribute;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.*;
 
-import java.util.Calendar;
-import java.util.Date;
-import java.util.Optional;
+import java.util.*;
 
 @Controller
 public class AdController {
@@ -74,7 +69,8 @@ public class AdController {
     }
 
     @PostMapping("/ads/create/minion")
-    public String create(@ModelAttribute Ad ad, @ModelAttribute Item item, @ModelAttribute Minion minion){
+    public String create(@ModelAttribute Ad ad, @ModelAttribute Item item, @ModelAttribute Minion minion,
+                         @RequestParam("newItemImage") String itemImage, @RequestParam("minion_skill")List<Long> minionSkillIds){
         AdLocation adLocation = new AdLocation();
         adLocation.setId(1);
         ad.setAd_location(adLocation);
@@ -86,6 +82,16 @@ public class AdController {
         ItemType itemType = new ItemType();
         itemType.setId(2);
         item.setItemType(itemType);
+
+        item.setImage(itemImage);
+
+        List<MinionSkill> minionSkills = new ArrayList<>();
+        for (long minionSkillId : minionSkillIds) {
+            Optional<MinionSkill> optionalMinionSkill = minionSkillDao.findById(minionSkillId);
+            optionalMinionSkill.ifPresent(minionSkills::add);
+        }
+        minion.setMinionSkills(minionSkills);
+
 
         item.setAd(ad);
         minion.setItem(item);
