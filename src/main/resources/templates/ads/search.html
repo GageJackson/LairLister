@@ -9,17 +9,46 @@
     <div class="row mt-5 pt-5">
         <div class="col">
             <h1 class="text-light">Ads</h1>
+
         </div>
         <div class="col d-flex justify-content-end align-items-center">
             <button class="btn btn-danger" type="button" data-bs-toggle="offcanvas" data-bs-target="#search" aria-controls="search">Search</button>
         </div>
     </div>
+<!--    <section th:with="fAdsSize=${#numbers.sequence(0, featuredAds.size()-1)}" class="row row-cols-3 gx-4 gy-3">-->
+<!--        <div th:each="index : ${fAdsSize}" class="col">-->
+<!--            <article class="card p-0 border-0 mb-3 bg-dark bg-opacity-100 h-100">-->
+<!--                <div class="card-header p-0 bg-dark bg-opacity-100 border-0">-->
+<!--                    <a href="#" th:href="@{/ads/{id}(id=${featuredAds[index].id})}">-->
+<!--&lt;!&ndash;                        <img th:src="@{/img/{imageName}(imageName=${allItems[__${featuredAds[index].id - 1}__].image})}" class="img-fluid">&ndash;&gt;-->
+<!--                    </a>-->
+<!--                </div>-->
+<!--                <div class="card-body bg-dark bg-opacity-100 p-2 border-0 mt-2">-->
+<!--                    <a href="#" th:href="@{/ads/{id}(id=${featuredAds[index].id})}" class="text-decoration-none">-->
+<!--                        <h6 th:text="${featuredAds[index].title}" class="text-danger"></h6>-->
+<!--                    </a>-->
+
+<!--                    <div class="row d-flex justify-content-between">-->
+<!--                        <div class="col">-->
+<!--                            <p th:text="${featuredAds[index].price}" class="text-danger"></p>-->
+
+<!--                        </div>-->
+<!--                        <div class="col">-->
+<!--                            <p th:text="${featuredAds[index].ad_location.name}" class="text-danger"></p>-->
+<!--                        </div>-->
+<!--                    </div>-->
+
+<!--                </div>-->
+<!--            </article>-->
+<!--        </div>-->
+<!--    </section>-->
 
     <section th:with="adsSize=${#numbers.sequence(0, allAds.size()-1)}" class="row row-cols-2 row-cols-lg-4 gx-4 gy-2">
         <div  th:each="index : ${adsSize}" class="col">
             <article class="card p-0 border-0 mb-3 bg-dark bg-opacity-100 h-100">
                 <div class="card-header p-0 bg-dark bg-opacity-100 border-0">
                     <a href="#" th:href="@{/ads/{id}(id=${allAds[index].id})}">
+
                         <img th:src="@{/img/{imageName}(imageName=${allItems[index].image})}" class="img-fluid">
 
                     </a>
@@ -38,7 +67,6 @@
                             <p th:text="${allAds[index].ad_location.name}" class="text-danger"></p>
                         </div>
                     </div>
-
                 </div>
             </article>
         </div>
@@ -78,8 +106,5 @@
 
 </footer>
 
-<script>
-
-</script>
 </body>
 </html>

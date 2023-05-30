@@ -197,15 +197,38 @@ public class AdController {
     @GetMapping("/ads")
     public String showAll(Model model) {
         model.addAttribute("allAds", adDao.findAll());
+        model.addAttribute("featuredAds", adDao.findAllByFeaturedTrue());
+
         model.addAttribute("allItems", itemDao.findAll());
 
         return "/ads/index";
     }
 
     @PostMapping ("/ads")
-    public String getOne(Model model) {
-        model.addAttribute("allAds", adDao.findAll());
-        model.addAttribute("allItems", itemDao.findAll());
+    public String search(Model model, @RequestParam("search") String search) {
+
+        return "redirect:/ads/search/" + search;
+    }
+
+    @GetMapping("/ads/search/{search}")
+    public String showSearch(Model model, @PathVariable String search) {
+        List<Ad> allAds = new ArrayList<>();
+        List<Item> allItems = new ArrayList<>();
+
+        if (search != null && !search.isEmpty()) {
+            allAds = adDao.findAllByDescriptionContainingIgnoreCaseOrTitleContainingIgnoreCase(search, search);
+        } else {
+            allAds = adDao.findAll();
+        }
+
+        for (Ad ad : allAds) {
+            Item item = itemDao.findByAd_Id(ad.getId());
+            allItems.add(item);
+        }
+
+        model.addAttribute("allAds", allAds);
+        model.addAttribute("allItems", allItems);
+        model.addAttribute("featuredAds", adDao.findAllByFeaturedTrue());
 
         return "/ads/index";
     }
